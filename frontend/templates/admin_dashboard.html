@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en">
+
+
+
+<head>
+
+
+
+    <meta charset="UTF-8">
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>Admin Dashboard - Prime Property</title>
+
+
+
+    <link rel="icon" type="image/png" href="/images/prime_logo.png">
+
+
+
+    <link rel="stylesheet" href="/css/index.css?v=20261023_emerald_slate_01">
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+    <script src="/js/auth.js"></script>
+
+
+
+    <script src="/js/page-transition.js?v=20261015_13"></script>
+
+
+
+    <script src="/js/navigation.js"></script>
+
+
+
+  <link rel="stylesheet" href="/css/admin_dashboard.css?v=20261117_overview_stats_fix_01">
+
+
+
+  <link rel="stylesheet" href="/css/mobile_responsive.css?v=20261117_overview_stats_fix_01">
+
+
+
+</head>
+
+
+
+<body class="dark-dashboard">
+
+
+
+    <!-- Sidebar Navigation -->
+
+
+
+    <nav class="sidebar">
+
+
+
+        <div class="sidebar-header">
+
+
+
+            <a href="/admin-dashboard" class="sidebar-logo">
+
+
+
+                <img src="/images/prime_logo.png" alt="Prime Property" style="height: 38px; width: auto; object-fit: contain; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));">
+
+
+
+                <span class="script-font">Prime Property</span>
+
+
+
+            </a>
+
+
+
+        </div>
+
+
+
+        
+
+
+
+        <div class="sidebar-nav">
+
+
+
+            <div class="nav-section">
+
+
+
+                <div class="nav-section-title">Dashboard</div>
+
+
+
+                <a href="/admin-dashboard" data-nav="admin-dashboard" class="nav-item active">
+
+
+
+                    <i class="fas fa-tachometer-alt"></i>
+
+
+
+                    <span>Dashboard</span>
+
+
+
+                </a>
+
+
+
+                <a href="/analytics" data-nav="analytics" class="nav-item">
+
+
+
+                    <i class="fas fa-chart-line"></i>
+
+
+
+                    <span>Analytics</span>
+
+
+
+                </a>
+
+
+
+                <a href="/notifications" data-nav="notifications" class="nav-item">
+
+
+
+                    <i class="fas fa-bell"></i>
+
+
+
+                    <span>Notifications</span>
+
+
+
+                    <span class="nav-badge">5</span>
+
+
+
+                </a>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="nav-section">
+
+
+
+                <div class="nav-section-title">Management</div>
+
+
+
+                <a href="/users" data-nav="users" class="nav-item">
+
+
+
+                    <i class="fas fa-users"></i>
+
+
+
+                    <span>Users</span>
+
+
+
+                </a>
+
+
+
+                <a href="/properties" data-nav="properties" class="nav-item">
+
+
+
+                    <i class="fas fa-building"></i>
+
+
+
+                    <span>Properties</span>
+
+
+
+                </a>
+
+
+
+                <a href="/owners" data-nav="owners" class="nav-item">
+
+
+
+                    <i class="fas fa-user-tie"></i>
+
+
+
+                    <span>Property Owners</span>
+
+
+
+                </a>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="nav-section">
+
+
+
+                <div class="nav-section-title">Services</div>
+
+
+
+                <a href="/service-requests" data-nav="service-requests" class="nav-item">
+
+
+
+                    <i class="fas fa-concierge-bell"></i>
+
+
+
+                    <span>Service Requests</span>
+
+
+
+                </a>
+
+
+
+                <a href="/maintenance" data-nav="maintenance" class="nav-item">
+
+
+
+                    <i class="fas fa-tools"></i>
+
+
+
+                    <span>Maintenance</span>
+
+
+
+                </a>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="nav-section">
+
+
+
+                <div class="nav-section-title">Financial</div>
+
+
+
+                <a href="/revenue" data-nav="revenue" class="nav-item">
+
+
+
+                    <i class="fas fa-dollar-sign"></i>
+
+
+
+                    <span>Revenue</span>
+
+
+
+                </a>
+
+
+
+                <a href="/invoices" data-nav="invoices" class="nav-item">
+
+
+
+                    <i class="fas fa-file-invoice"></i>
+
+
+
+                    <span>Invoices</span>
+
+
+
+                </a>
+
+
+
+                <a href="/reports" data-nav="reports" class="nav-item">
+
+
+
+                    <i class="fas fa-chart-pie"></i>
+
+
+
+                    <span>Reports</span>
+
+
+
+                </a>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="nav-section">
+
+
+
+                <div class="nav-section-title">System</div>
+
+
+
+                <a href="/settings" data-nav="settings" class="nav-item">
+
+
+
+                    <i class="fas fa-cog"></i>
+
+
+
+                    <span>Settings</span>
+
+
+
+                </a>
+
+
+
+                <a href="/security" data-nav="security" class="nav-item">
+
+
+
+                    <i class="fas fa-shield-alt"></i>
+
+
+
+                    <span>Security</span>
+
+
+
+                </a>
+
+
+
+                <a href="/backup" data-nav="backup" class="nav-item">
+
+
+
+                    <i class="fas fa-database"></i>
+
+
+
+                    <span>Backup</span>
+
+
+
+                </a>
+
+
+
+                <a href="/user-dashboard" data-nav="user-dashboard" class="nav-item" title="Switch to Client/User View">
+
+
+
+                    <i class="fas fa-user"></i>
+
+
+
+                    <span>Client Portal</span>
+
+
+
+                </a>
+
+
+
+            </div>
+
+
+
+            <div class="nav-section logout-section" style="margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(212, 175, 55, 0.15);">
+
+
+
+                <div class="nav-section-title">Session</div>
+
+
+
+                <a href="#" onclick="logout(); return false;" class="nav-item logout-nav-item" style="color: #F87171 !important;">
+
+
+
+                    <i class="fas fa-sign-out-alt" style="color: #EF4444 !important;"></i>
+
+
+
+                    <span>Logout</span>
+
+
+
+                </a>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </nav>
+
+
+
+
+
+
+
+    <!-- Main Content -->
+
+
+
+    <div class="main-content">
+
+
+
+        <!-- Top Navigation -->
+
+
+
+        <div class="top-nav">
+
+
+
+            <button class="mobile-menu-toggle" id="mobileSidebarToggle" aria-label="Toggle Menu"><i class="fas fa-bars"></i></button>
+
+
+
+            <h1 class="page-title">Admin <span class="script-font">Dashboard</span></h1>
+
+
+
+            <div class="top-nav-actions">
+
+
+
+                <div class="search-box">
+
+
+
+                    <i class="fas fa-search"></i>
+
+
+
+                    <input type="text" placeholder="Search users, properties, or reports...">
+
+
+
+                </div>
+
+
+
+                <button class="notification-btn">
+
+
+
+                    <i class="fas fa-bell"></i>
+
+
+
+                    <span class="notification-badge">3</span>
+
+
+
+                </button>
+
+
+
+                <div class="user-profile" id="userProfileDropdown">
+
+
+
+                    <div class="user-avatar">
+
+
+
+                        <i class="fas fa-user-shield"></i>
+
+
+
+                    </div>
+
+
+
+                    <div class="user-info">
+
+
+
+                        <div class="user-name">Admin User</div>
+
+
+
+                        <div class="user-role">System Administrator</div>
+
+
+
+                    </div>
+
+
+
+                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+
+
+
+                    
+
+
+
+                    <!-- User Dropdown Menu -->
+
+
+
+                    <div class="user-dropdown" id="userDropdown">
+
+
+
+                        <div class="dropdown-item" onclick="window.location.href='/settings'">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </div>
+
+
+
+                    </div>
+
+
+
+                <!-- Direct Top Nav Logout Button -->
+
+                <button type="button" class="direct-logout-btn" onclick="logout()" title="Logout of your account" style="margin-left: 0.75rem;">
+
+                    <i class="fas fa-sign-out-alt"></i>
+
+                    <span>Logout</span>
+
+                </button>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Notification Panel -->
+
+
+
+        <div class="notification-panel" id="notificationPanel">
+
+
+
+            <div class="notification-header">
+
+
+
+                <h3>Notifications</h3>
+
+
+
+                <div class="notification-actions">
+
+
+
+                    <button class="mark-all-read">Mark All Read</button>
+
+
+
+                    <button class="close-panel">
+
+
+
+                        <i class="fas fa-times"></i>
+
+
+
+                    </button>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+            <div class="notification-list">
+
+
+
+                <div class="notification-item unread">
+
+
+
+                    <div class="notification-icon critical">
+
+
+
+                        <i class="fas fa-exclamation-triangle"></i>
+
+
+
+                    </div>
+
+
+
+                    <div class="notification-content">
+
+
+
+                        <div class="notification-title">System Alert</div>
+
+
+
+                        <div class="notification-message">High server load detected on main server</div>
+
+
+
+                        <div class="notification-time">2 minutes ago</div>
+
+
+
+                    </div>
+
+
+
+                    <div class="notification-status">
+
+
+
+                        <div class="unread-indicator"></div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+                
+
+
+
+                <div class="notification-item unread">
+
+
+
+                    <div class="notification-icon warning">
+
+
+
+                        <i class="fas fa-database"></i>
+
+
+
+                    </div>
+
+
+
+                    <div class="notification-content">
+
+
+
+                        <div class="notification-title">Database Backup</div>
+
+
+
+                        <div class="notification-message">Scheduled backup completed successfully</div>
+
+
+
+                        <div class="notification-time">15 minutes ago</div>
+
+
+
+                    </div>
+
+
+
+                    <div class="notification-status">
+
+
+
+                        <div class="unread-indicator"></div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+                
+
+
+
+                <div class="notification-item">
+
+
+
+                    <div class="notification-icon info">
+
+
+
+                        <i class="fas fa-user-plus"></i>
+
+
+
+                    </div>
+
+
+
+                    <div class="notification-content">
+
+
+
+                        <div class="notification-title">New User Registration</div>
+
+
+
+                        <div class="notification-message">John Smith registered as a property owner</div>
+
+
+
+                        <div class="notification-time">1 hour ago</div>
+
+
+
+                    </div>
+
+
+
+                    <div class="notification-status">
+
+
+
+                        <div class="read-indicator"></div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+                
+
+
+
+                <div class="notification-item">
+
+
+
+                    <div class="notification-icon success">
+
+
+
+                        <i class="fas fa-check-circle"></i>
+
+
+
+                    </div>
+
+
+
+                    <div class="notification-content">
+
+
+
+                        <div class="notification-title">Payment Processed</div>
+
+
+
+                        <div class="notification-message">Monthly rent payment of $1,200 processed</div>
+
+
+
+                        <div class="notification-time">2 hours ago</div>
+
+
+
+                    </div>
+
+
+
+                    <div class="notification-status">
+
+
+
+                        <div class="read-indicator"></div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+                
+
+
+
+                <div class="notification-item">
+
+
+
+                    <div class="notification-icon info">
+
+
+
+                        <i class="fas fa-building"></i>
+
+
+
+                    </div>
+
+
+
+                    <div class="notification-content">
+
+
+
+                        <div class="notification-title">Property Added</div>
+
+
+
+                        <div class="notification-message">New property "Oak Street Apartments" was added</div>
+
+
+
+                        <div class="notification-time">3 hours ago</div>
+
+
+
+                    </div>
+
+
+
+                    <div class="notification-status">
+
+
+
+                        <div class="read-indicator"></div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+            <div class="notification-footer">
+
+
+
+                <a href="#" class="view-all-notifications">View All Notifications</a>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Dashboard Grid -->
+
+
+
+        <div class="dashboard-grid">
+
+
+
+            <!-- System Overview Card -->
+
+
+
+            <div class="dashboard-card">
+
+
+
+                <div class="card-header">
+
+
+
+                    <div class="card-header-content">
+
+
+
+                        <div class="card-title-section">
+
+
+
+                            <i class="fas fa-tachometer-alt card-icon"></i>
+
+
+
+                            <h3 class="card-title">System Overview</h3>
+
+
+
+                        </div>
+
+
+
+                        <div class="card-actions">
+
+
+
+                            <button class="card-action-btn" onclick="loadDashboardData(); showNotificationMessage('Refreshing dashboard data...', 'info');">
+
+
+
+                                <i class="fas fa-refresh"></i>
+
+
+
+                            </button>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+                <div class="card-content">
+
+
+
+                    <div class="overview-stats" style="display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 1.35rem !important; width: 100% !important; box-sizing: border-box !important;">
+
+                        <div class="stat-card" style="display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important; background: rgba(14, 20, 26, 0.88) !important; border: 1.5px solid rgba(212, 175, 55, 0.28) !important; border-radius: 18px !important; padding: 1.75rem 1.25rem 1.4rem !important; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important; box-sizing: border-box !important; width: 100% !important; overflow: hidden !important;">
+
+                            <div class="stat-number" id="totalUsers" style="font-family: 'Playfair Display', Georgia, serif !important; font-size: 2.35rem !important; font-weight: 800 !important; line-height: 1.15 !important; margin: 0 0 0.45rem 0 !important; background: linear-gradient(135deg, #FFFFFF 15%, #F6E7B0 60%, #D4AF37 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important; color: #D4AF37 !important; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6) !important; width: 100% !important; text-align: center !important;">Loading...</div>
+
+                            <div class="stat-label" style="font-size: 0.88rem !important; font-weight: 700 !important; color: #FFFFFF !important; text-transform: uppercase !important; letter-spacing: 0.6px !important; margin: 0 0 0.55rem 0 !important; width: 100% !important; text-align: center !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;">Total Users</div>
+
+                            <div class="stat-change positive" id="usersChange" style="font-size: 0.82rem !important; font-weight: 700 !important; padding: 0.25rem 0.75rem !important; border-radius: 20px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; margin: 0 0 0.65rem 0 !important; line-height: 1.2 !important;">Loading...</div>
+
+                            <div class="stat-breakdown" id="usersBreakdown" style="width: 100% !important; margin-top: 0.4rem !important; padding-top: 0.6rem !important; border-top: 1px solid rgba(212, 175, 55, 0.2) !important; text-align: center !important; box-sizing: border-box !important;">
+
+                                <small style="display: block !important; color: #CBD5E1 !important; font-size: 0.82rem !important; font-weight: 500 !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;">Owners: <span id="totalOwners" style="color: #FFDF73 !important; font-weight: 700 !important;">0</span> | Consultants: <span id="totalConsultants" style="color: #FFDF73 !important; font-weight: 700 !important;">0</span></small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="stat-card" style="display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important; background: rgba(14, 20, 26, 0.88) !important; border: 1.5px solid rgba(212, 175, 55, 0.28) !important; border-radius: 18px !important; padding: 1.75rem 1.25rem 1.4rem !important; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important; box-sizing: border-box !important; width: 100% !important; overflow: hidden !important;">
+
+                            <div class="stat-number" id="totalProperties" style="font-family: 'Playfair Display', Georgia, serif !important; font-size: 2.35rem !important; font-weight: 800 !important; line-height: 1.15 !important; margin: 0 0 0.45rem 0 !important; background: linear-gradient(135deg, #FFFFFF 15%, #F6E7B0 60%, #D4AF37 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important; color: #D4AF37 !important; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6) !important; width: 100% !important; text-align: center !important;">Loading...</div>
+
+                            <div class="stat-label" style="font-size: 0.88rem !important; font-weight: 700 !important; color: #FFFFFF !important; text-transform: uppercase !important; letter-spacing: 0.6px !important; margin: 0 0 0.55rem 0 !important; width: 100% !important; text-align: center !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;">Properties</div>
+
+                            <div class="stat-change positive" id="propertiesChange" style="font-size: 0.82rem !important; font-weight: 700 !important; padding: 0.25rem 0.75rem !important; border-radius: 20px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; margin: 0 0 0.65rem 0 !important; line-height: 1.2 !important;">Loading...</div>
+
+                            <div class="stat-breakdown" id="propertiesBreakdown" style="width: 100% !important; margin-top: 0.4rem !important; padding-top: 0.6rem !important; border-top: 1px solid rgba(212, 175, 55, 0.2) !important; text-align: center !important; box-sizing: border-box !important;">
+
+                                <small style="display: block !important; color: #CBD5E1 !important; font-size: 0.82rem !important; font-weight: 500 !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;">Active: <span id="activeProperties" style="color: #FFDF73 !important; font-weight: 700 !important;">0</span> | Total: <span id="totalPropertiesCount" style="color: #FFDF73 !important; font-weight: 700 !important;">0</span></small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="stat-card" style="display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important; background: rgba(14, 20, 26, 0.88) !important; border: 1.5px solid rgba(212, 175, 55, 0.28) !important; border-radius: 18px !important; padding: 1.75rem 1.25rem 1.4rem !important; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important; box-sizing: border-box !important; width: 100% !important; overflow: hidden !important;">
+
+                            <div class="stat-number" id="totalRevenue" style="font-family: 'Playfair Display', Georgia, serif !important; font-size: 2.35rem !important; font-weight: 800 !important; line-height: 1.15 !important; margin: 0 0 0.45rem 0 !important; background: linear-gradient(135deg, #FFFFFF 15%, #F6E7B0 60%, #D4AF37 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important; color: #D4AF37 !important; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6) !important; width: 100% !important; text-align: center !important;">Loading...</div>
+
+                            <div class="stat-label" style="font-size: 0.88rem !important; font-weight: 700 !important; color: #FFFFFF !important; text-transform: uppercase !important; letter-spacing: 0.6px !important; margin: 0 0 0.55rem 0 !important; width: 100% !important; text-align: center !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;">Total Revenue</div>
+
+                            <div class="stat-change positive" id="revenueChange" style="font-size: 0.82rem !important; font-weight: 700 !important; padding: 0.25rem 0.75rem !important; border-radius: 20px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; margin: 0 0 0.65rem 0 !important; line-height: 1.2 !important;">Loading...</div>
+
+                            <div class="stat-breakdown" id="revenueBreakdown" style="width: 100% !important; margin-top: 0.4rem !important; padding-top: 0.6rem !important; border-top: 1px solid rgba(212, 175, 55, 0.2) !important; text-align: center !important; box-sizing: border-box !important;">
+
+                                <small style="display: block !important; color: #CBD5E1 !important; font-size: 0.82rem !important; font-weight: 500 !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;">This Month: <span id="monthlyRevenue" style="color: #FFDF73 !important; font-weight: 700 !important;">$0</span></small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="stat-card" style="display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important; background: rgba(14, 20, 26, 0.88) !important; border: 1.5px solid rgba(212, 175, 55, 0.28) !important; border-radius: 18px !important; padding: 1.75rem 1.25rem 1.4rem !important; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important; box-sizing: border-box !important; width: 100% !important; overflow: hidden !important;">
+
+                            <div class="stat-number" id="conversionRate" style="font-family: 'Playfair Display', Georgia, serif !important; font-size: 2.35rem !important; font-weight: 800 !important; line-height: 1.15 !important; margin: 0 0 0.45rem 0 !important; background: linear-gradient(135deg, #FFFFFF 15%, #F6E7B0 60%, #D4AF37 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important; color: #D4AF37 !important; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6) !important; width: 100% !important; text-align: center !important;">Loading...</div>
+
+                            <div class="stat-label" style="font-size: 0.88rem !important; font-weight: 700 !important; color: #FFFFFF !important; text-transform: uppercase !important; letter-spacing: 0.6px !important; margin: 0 0 0.55rem 0 !important; width: 100% !important; text-align: center !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;">Conversion Rate</div>
+
+                            <div class="stat-change positive" id="conversionChange" style="font-size: 0.82rem !important; font-weight: 700 !important; padding: 0.25rem 0.75rem !important; border-radius: 20px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; margin: 0 0 0.65rem 0 !important; line-height: 1.2 !important;">Loading...</div>
+
+                            <div class="stat-breakdown" id="conversionBreakdown" style="width: 100% !important; margin-top: 0.4rem !important; padding-top: 0.6rem !important; border-top: 1px solid rgba(212, 175, 55, 0.2) !important; text-align: center !important; box-sizing: border-box !important;">
+
+                                <small style="display: block !important; color: #CBD5E1 !important; font-size: 0.82rem !important; font-weight: 500 !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;">Leads: <span id="totalLeads" style="color: #FFDF73 !important; font-weight: 700 !important;">0</span> | Clients: <span id="totalClients" style="color: #FFDF73 !important; font-weight: 700 !important;">0</span></small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <!-- Application Monitoring Card -->
+
+
+
+            <div class="dashboard-card">
+
+
+
+                <div class="card-header">
+
+
+
+                    <div class="card-header-content">
+
+
+
+                        <div class="card-title-section">
+
+
+
+                            <i class="fas fa-server card-icon"></i>
+
+
+
+                            <h3 class="card-title">Application Monitoring</h3>
+
+
+
+                        </div>
+
+
+
+                        <div class="card-actions">
+
+
+
+                            <button class="card-action-btn" onclick="refreshSystemMetrics()">
+
+
+
+                                <i class="fas fa-refresh"></i>
+
+
+
+                            </button>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+                <div class="card-content">
+
+
+
+                    <div class="system-monitoring-grid">
+
+
+
+                        <!-- CPU Usage -->
+
+
+
+                        <div class="monitor-card">
+
+
+
+                            <div class="monitor-header">
+
+
+
+                                <div class="monitor-icon cpu-icon">
+
+
+
+                                    <i class="fas fa-microchip"></i>
+
+
+
+                            </div>
+
+
+
+                                <div class="monitor-title">
+
+
+
+                                    <h4>CPU Usage</h4>
+
+
+
+                                    <span class="monitor-subtitle" id="cpuCores">0 cores</span>
+
+
+
+                            </div>
+
+
+
+                            </div>
+
+
+
+                            <div class="monitor-content">
+
+
+
+                                <div class="monitor-value" id="cpuUsage">0.00%</div>
+
+
+
+                                <div class="monitor-progress">
+
+
+
+                                    <div class="progress-bar">
+
+
+
+                                        <div class="progress-fill cpu-progress" id="cpuProgressBar" style="width: 0%"></div>
+
+
+
+                        </div>
+
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+                        
+
+
+
+                        <!-- RAM Usage -->
+
+
+
+                        <div class="monitor-card">
+
+
+
+                            <div class="monitor-header">
+
+
+
+                                <div class="monitor-icon ram-icon">
+
+
+
+                                    <i class="fas fa-memory"></i>
+
+
+
+                            </div>
+
+
+
+                                <div class="monitor-title">
+
+
+
+                                    <h4>RAM Usage</h4>
+
+
+
+                                    <span class="monitor-subtitle" id="ramThreads">0 threads</span>
+
+
+
+                                    </div>
+
+
+
+                                    </div>
+
+
+
+                            <div class="monitor-content">
+
+
+
+                                <div class="monitor-value" id="ramUsage">0 MB</div>
+
+
+
+                                <div class="monitor-progress">
+
+
+
+                                    <div class="progress-bar">
+
+
+
+                                        <div class="progress-fill ram-progress" id="ramProgressBar" style="width: 0%"></div>
+
+
+
+                                </div>
+
+
+
+                                    </div>
+
+
+
+                                <div class="monitor-details">
+
+
+
+                                    <span id="ramUsed">0 MB</span> used by application
+
+
+
+                                    </div>
+
+
+
+                                </div>
+
+
+
+                                    </div>
+
+
+
+
+
+
+
+                        <!-- Bandwidth Usage -->
+
+
+
+                        <div class="monitor-card">
+
+
+
+                            <div class="monitor-header">
+
+
+
+                                <div class="monitor-icon bandwidth-icon">
+
+
+
+                                    <i class="fas fa-network-wired"></i>
+
+
+
+                                    </div>
+
+
+
+                                <div class="monitor-title">
+
+
+
+                                    <h4>Bandwidth</h4>
+
+
+
+                                    <span class="monitor-subtitle" id="networkConnections">0 connections</span>
+
+
+
+                                </div>
+
+
+
+                                    </div>
+
+
+
+                            <div class="monitor-content">
+
+
+
+                                <div class="bandwidth-stats">
+
+
+
+                                    <div class="bandwidth-item">
+
+
+
+                                        <div class="bandwidth-label">
+
+
+
+                                            <i class="fas fa-upload"></i> Sent
+
+
+
+                                    </div>
+
+
+
+                                        <div class="bandwidth-value" id="bandwidthSent">0 MB</div>
+
+
+
+                                </div>
+
+
+
+                                    <div class="bandwidth-item">
+
+
+
+                                        <div class="bandwidth-label">
+
+
+
+                                            <i class="fas fa-download"></i> Received
+
+
+
+                            </div>
+
+
+
+                                        <div class="bandwidth-value" id="bandwidthRecv">0 MB</div>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                                <div class="monitor-details">
+
+
+
+                                    <span id="bandwidthTotal">Total: 0 MB</span>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <!-- Empty Space (Reserved for future use) -->
+
+
+
+            <div></div>
+
+
+
+
+
+
+
+            <!-- User Management Card -->
+
+
+
+            <div class="dashboard-card">
+
+
+
+                <div class="card-header">
+
+
+
+                    <div class="card-header-content">
+
+
+
+                        <div class="card-title-section">
+
+
+
+                            <i class="fas fa-users card-icon"></i>
+
+
+
+                            <h3 class="card-title">Recent Users</h3>
+
+
+
+                        </div>
+
+
+
+                        <div class="card-actions">
+
+
+
+                            <button class="card-action-btn">
+
+
+
+                                <i class="fas fa-plus"></i>
+
+
+
+                            </button>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+                <div class="card-content">
+
+
+
+                    <div class="table-container">
+
+
+
+                        <table class="user-table">
+
+
+
+                        <thead>
+
+
+
+                            <tr>
+
+
+
+                                <th>User</th>
+
+
+
+                                <th>Role</th>
+
+
+
+                                <th>Status</th>
+
+
+
+                                <th>Actions</th>
+
+
+
+                            </tr>
+
+
+
+                        </thead>
+
+
+
+                        <tbody id="usersTableBody">
+
+
+
+                            <tr>
+
+
+
+                                <td colspan="4" style="text-align: center; padding: 2rem;">
+
+
+
+                                    <i class="fas fa-spinner fa-spin"></i>
+
+
+
+                                    <span style="margin-left: 0.5rem;">Loading users...</span>
+
+
+
+                                </td>
+
+
+
+                            </tr>
+
+
+
+                        </tbody>
+
+
+
+                        </table>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Recent Activity Card -->
+
+
+
+            <div class="dashboard-card">
+
+
+
+                <div class="card-header">
+
+
+
+                    <div class="card-header-content">
+
+
+
+                        <div class="card-title-section">
+
+
+
+                            <i class="fas fa-history card-icon"></i>
+
+
+
+                            <h3 class="card-title">Recent Activity <span style="font-size: 0.7em; font-weight: normal; color: #888;">(Last 8 Days)</span></h3>
+
+
+
+                        </div>
+
+
+
+                        <div class="card-actions">
+
+
+
+                            <button class="card-action-btn">
+
+
+
+                                <i class="fas fa-filter"></i>
+
+
+
+                            </button>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+                <div class="card-content">
+
+
+
+                    <div class="activity-container">
+
+
+
+                        <div class="activity-list" id="activityList">
+
+
+
+                            <div class="activity-item">
+
+
+
+                                <div class="activity-icon">
+
+
+
+                                    <i class="fas fa-spinner fa-spin"></i>
+
+
+
+                                </div>
+
+
+
+                                <div class="activity-content">
+
+
+
+                                    <div class="activity-title">Loading Activities</div>
+
+
+
+                                    <div class="activity-description">Please wait while we fetch recent activities...</div>
+
+
+
+                                    <div class="activity-time">Loading...</div>
+
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <!-- Property Distribution Card -->
+
+
+
+            <div class="dashboard-card">
+
+
+
+                <div class="card-header">
+
+
+
+                    <div class="card-header-content">
+
+
+
+                        <div class="card-title-section">
+
+
+
+                            <i class="fas fa-chart-pie card-icon"></i>
+
+
+
+                            <h3 class="card-title">Property Distribution</h3>
+
+
+
+                        </div>
+
+
+
+                        <div class="card-actions">
+
+
+
+                            <button class="card-action-btn">
+
+
+
+                                <i class="fas fa-expand"></i>
+
+
+
+                            </button>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+                <div class="card-content">
+
+
+
+                    <div class="chart-container">
+
+
+
+                        <canvas id="propertyChart"></canvas>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+  <script src="/js/admin_dashboard.js"></script>
+
+
+
+</body>
+
+
+
+</html>
+
+
+

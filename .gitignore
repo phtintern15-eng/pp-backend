@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Secrets
+.env
+backend/.env
+
+# Uploads & logs
+uploads/*
+!uploads/.gitkeep
+frontend/uploads/*
+!frontend/uploads/.gitkeep
+*.log
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# cPanel / local noise
+passenger_wsgi.pyc
+

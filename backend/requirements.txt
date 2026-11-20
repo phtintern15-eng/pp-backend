@@ -1,30 +1,22 @@
 # ==============================================================================
-# Prime Property Platform - Dependencies (Target: Python 3.11)
-# Downgraded & Highly Compatible LTS Stack
+# Prime Property Platform - Dependencies (Python 3.11+)
 # ==============================================================================
 
-# Core Flask Framework & WSGI (Downgraded to Stable 2.3.x LTS)
-Flask>=2.2.5,<3.0.0
+# Core Flask Framework & WSGI
+Flask>=2.2.5,<3.1.0
 Flask-Cors>=3.0.10,<4.1.0
-Werkzeug>=2.2.3,<3.0.0
-
-# Database & ORM (Downgraded to Stable 1.4.x / 2.0.x)
-SQLAlchemy>=1.4.40,<2.1.0
-PyMySQL>=1.0.2,<1.2.0
-cryptography>=39.0.0,<42.0.0
-
-# Authentication, Security & Cryptography
-passlib[bcrypt]>=1.7.4
-bcrypt>=3.2.0,<4.1.0
-python-jose[cryptography]>=3.3.0
-itsdangerous>=2.1.0,<2.2.0
-
-# Networking, Parsing & Templating
-requests>=2.28.0,<2.32.0
-python-dotenv>=0.21.0,<1.1.0
-email-validator>=1.3.0,<2.2.0
+Werkzeug>=2.2.3,<3.1.0
 Jinja2>=3.1.2,<3.2.0
 
-# Background Tasks & System Monitoring
-psutil>=5.9.0,<6.0.0
-APScheduler>=3.9.0,<3.11.0
+# Database & ORM
+SQLAlchemy>=1.4.40,<2.1.0
+PyMySQL>=1.0.2,<1.2.0
+cryptography>=39.0.0,<43.0.0
+
+# Authentication & Security
+bcrypt>=3.2.0,<4.2.0
+python-jose[cryptography]>=3.3.0
+python-dotenv>=0.21.0,<1.1.0
+
+# System Monitoring (Optional Metrics)
+psutil>=5.9.0,<6.1.0

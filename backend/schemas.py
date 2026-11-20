@@ -1,10 +1,15 @@
-from typing import Optional, List, Any
+"""
+backend/schemas.py
+Data validation schemas for request body parsing.
+Provides lightweight Pydantic-compatible dataclasses without external overhead.
+"""
+from typing import Optional, List
 from datetime import datetime
-from models import UserType, PropertyType
 
 EmailStr = str
 
 class BaseModel:
+    """Lightweight dictionary-backed schema model compatible with FastAPI/Pydantic syntax."""
     def __init__(self, **kwargs):
         self._raw_kwargs = dict(kwargs)
         for k, v in kwargs.items():
@@ -18,28 +23,19 @@ class BaseModel:
     def model_dump(self, *args, **kwargs):
         return self.dict(*args, **kwargs)
 
-    @classmethod
-    def from_orm(cls, obj):
-        kwargs = {}
-        for k in dir(obj):
-            if not k.startswith('_'):
-                try:
-                    kwargs[k] = getattr(obj, k)
-                except Exception:
-                    pass
-        return cls(**kwargs)
-
     def __getattr__(self, item):
         return None
 
 
+# ==============================================================================
 # User Schemas
+# ==============================================================================
 class UserBase(BaseModel):
     email: EmailStr
     first_name: str
     last_name: str
     phone: Optional[str] = None
-    user_type: UserType
+    user_type: str = "buyer"
     company: Optional[str] = None
     property_count: Optional[str] = None
     location: Optional[str] = None
@@ -60,21 +56,20 @@ class UserUpdate(BaseModel):
     company: Optional[str] = None
     location: Optional[str] = None
     profile_image: Optional[str] = None
-    user_type: Optional[UserType] = None
+    user_type: Optional[str] = None
     is_active: Optional[bool] = None
 
 class UserResponse(UserBase):
-    id: int
-    is_active: bool
-    is_admin: bool
-    profile_image: Optional[str] = None
-    created_at: datetime
+    id: Optional[int] = None
+    is_active: Optional[bool] = True
+    is_admin: Optional[bool] = False
+    created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
-    
-    class Config:
-        from_attributes = True
 
+
+# ==============================================================================
 # Property Schemas
+# ==============================================================================
 class PropertyBase(BaseModel):
     title: str
     description: Optional[str] = None
@@ -82,12 +77,12 @@ class PropertyBase(BaseModel):
     city: str
     state: str
     zip_code: str
-    property_type: PropertyType
-    listing_type: Optional[str] = "sale"  # "sale" or "rent"
+    property_type: str = "RESIDENTIAL"
+    listing_type: Optional[str] = "sale"
     bedrooms: Optional[int] = None
     bathrooms: Optional[int] = None
     area_sqft: Optional[float] = None
-    price: float
+    price: float = 0.0
     latitude: Optional[float] = None
     longitude: Optional[float] = None
     video_url: Optional[str] = None
@@ -104,7 +99,7 @@ class PropertyUpdate(BaseModel):
     city: Optional[str] = None
     state: Optional[str] = None
     zip_code: Optional[str] = None
-    property_type: Optional[PropertyType] = None
+    property_type: Optional[str] = None
     listing_type: Optional[str] = None
     bedrooms: Optional[int] = None
     bathrooms: Optional[int] = None
@@ -117,62 +112,38 @@ class PropertyUpdate(BaseModel):
     is_available: Optional[bool] = None
     image_urls: Optional[List[str]] = None
 
-class PropertyImageResponse(BaseModel):
-    id: int
-    image_url: str
-    is_primary: bool
 
-    class Config:
-        from_attributes = True
-
-class PropertyResponse(PropertyBase):
-    id: int
-    foreign_buyer_eligible: Optional[bool] = True
-    is_available: bool
-    owner_id: int
-    created_at: datetime
-    updated_at: Optional[datetime] = None
-    images: List[PropertyImageResponse] = []
-    
-    class Config:
-        from_attributes = True
-
+# ==============================================================================
 # Consultation Schemas
+# ==============================================================================
 class ConsultationBase(BaseModel):
     first_name: str
     last_name: str
     email: EmailStr
     phone: Optional[str] = None
     company: Optional[str] = None
-    property_count: str
-    property_types: List[str]
-    challenges: List[str]
-    features: List[str]
+    property_count: Optional[str] = None
+    property_types: Optional[List[str]] = None
+    challenges: Optional[List[str]] = None
+    features: Optional[List[str]] = None
     budget: Optional[str] = None
     timeline: Optional[str] = None
     current_software: Optional[str] = None
     team_size: Optional[str] = None
-    preferred_contact: str
+    preferred_contact: Optional[str] = None
     additional_info: Optional[str] = None
 
 class ConsultationCreate(ConsultationBase):
     pass
 
-class ConsultationResponse(ConsultationBase):
-    id: int
-    user_id: Optional[int] = None
-    status: str
-    created_at: datetime
-    updated_at: Optional[datetime] = None
-    
-    class Config:
-        from_attributes = True
 
+# ==============================================================================
 # Service Request Schemas
+# ==============================================================================
 class ServiceRequestBase(BaseModel):
     service_type: str
     property_id: Optional[int] = None
-    description: str
+    description: str = ""
     urgency: str = "medium"
     scheduled_date: Optional[datetime] = None
 
@@ -187,29 +158,17 @@ class ServiceRequestUpdate(BaseModel):
     status: Optional[str] = None
     scheduled_date: Optional[datetime] = None
 
-class ServiceRequestResponse(ServiceRequestBase):
-    id: int
-    user_id: int
-    status: str
-    created_at: datetime
-    updated_at: Optional[datetime] = None
-    
-    class Config:
-        from_attributes = True
 
-# Authentication Schemas
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-
+# ==============================================================================
+# Authentication & Session Token Schemas
+# ==============================================================================
 class TokenData(BaseModel):
     email: Optional[str] = None
 
-class LoginRequest(BaseModel):
-    email: EmailStr
-    password: str
 
+# ==============================================================================
 # Consultant Profile Schemas
+# ==============================================================================
 class ConsultantProfileBase(BaseModel):
     license_number: Optional[str] = None
     years_experience: Optional[int] = 0
@@ -225,9 +184,6 @@ class ConsultantProfileBase(BaseModel):
     website: Optional[str] = None
     business_address: Optional[str] = None
     years_in_business: Optional[int] = 0
-
-class ConsultantProfileCreate(ConsultantProfileBase):
-    pass
 
 class ConsultantProfileUpdate(BaseModel):
     license_number: Optional[str] = None
@@ -245,16 +201,10 @@ class ConsultantProfileUpdate(BaseModel):
     business_address: Optional[str] = None
     years_in_business: Optional[int] = None
 
-class ConsultantProfileResponse(ConsultantProfileBase):
-    id: int
-    user_id: int
-    created_at: datetime
-    updated_at: Optional[datetime] = None
-    
-    class Config:
-        from_attributes = True
 
-# Client Schemas
+# ==============================================================================
+# Client & Lead Schemas
+# ==============================================================================
 class ClientBase(BaseModel):
     first_name: str
     last_name: str
@@ -276,16 +226,6 @@ class ClientUpdate(BaseModel):
     status: Optional[str] = None
     notes: Optional[str] = None
 
-class ClientResponse(ClientBase):
-    id: int
-    consultant_id: int
-    created_at: datetime
-    updated_at: Optional[datetime] = None
-    
-    class Config:
-        from_attributes = True
-
-# Lead Schemas
 class LeadBase(BaseModel):
     first_name: str
     last_name: str
@@ -307,16 +247,10 @@ class LeadUpdate(BaseModel):
     status: Optional[str] = None
     notes: Optional[str] = None
 
-class LeadResponse(LeadBase):
-    id: int
-    consultant_id: int
-    created_at: datetime
-    updated_at: Optional[datetime] = None
-    
-    class Config:
-        from_attributes = True
 
-# Service Schemas
+# ==============================================================================
+# Service & Consultation Request Schemas
+# ==============================================================================
 class ServiceBase(BaseModel):
     service_name: str
     description: Optional[str] = None
@@ -332,16 +266,6 @@ class ServiceUpdate(BaseModel):
     service_rate: Optional[str] = None
     is_active: Optional[bool] = None
 
-class ServiceResponse(ServiceBase):
-    id: int
-    consultant_id: int
-    created_at: datetime
-    updated_at: Optional[datetime] = None
-    
-    class Config:
-        from_attributes = True
-
-# Consultation Request Schemas
 class ConsultationRequestBase(BaseModel):
     title: str
     property_address: str
@@ -356,70 +280,28 @@ class ConsultationRequestCreate(ConsultationRequestBase):
     owner_email: Optional[str] = None
     owner_phone: Optional[str] = None
 
-class ConsultationRequestUpdate(BaseModel):
-    title: Optional[str] = None
-    property_address: Optional[str] = None
-    consultation_type: Optional[str] = None
-    description: Optional[str] = None
-    preferred_date: Optional[datetime] = None
-    preferred_time: Optional[str] = None
-    scheduled_date: Optional[datetime] = None
-    scheduled_time: Optional[str] = None
-    status: Optional[str] = None
 
-class ConsultationRequestResponse(ConsultationRequestBase):
-    id: int
-    consultant_id: int
-    owner_id: int
-    status: str
-    scheduled_date: Optional[datetime] = None
-    scheduled_time: Optional[str] = None
-    owner_name: Optional[str] = None
-    owner_email: Optional[str] = None
-    owner_phone: Optional[str] = None
-    created_at: datetime
-    updated_at: Optional[datetime] = None
-    
-    class Config:
-        from_attributes = True
-
-# Visitor Info Schemas
+# ==============================================================================
+# Visitor Inquiry Schema
+# ==============================================================================
 class VisitorInfoCreate(BaseModel):
     full_name: str
     email: EmailStr
     phone: str
     looking_for: Optional[str] = None
 
-class VisitorInfoResponse(BaseModel):
-    id: int
-    full_name: str
-    email: str
-    phone: str
-    looking_for: Optional[str] = None
-    created_at: datetime
-    
-    class Config:
-        from_attributes = True
-
-# Response schemas
-class MessageResponse(BaseModel):
-    message: str
-    success: bool = True
-
-
-# Session Schemas
-class SessionUser(BaseModel):
-    id: int
-    email: str
-    first_name: str
-    last_name: str
-    user_type: str
-    is_admin: bool = False
-    is_active: bool = True
-    company: Optional[str] = None
-    location: Optional[str] = None
-
-class SessionInfoResponse(BaseModel):
-    authenticated: bool
-    session_active: bool
-    user: Optional[SessionUser] = None
+# Backward compatibility aliases
+PropertyResponse = PropertyBase
+ConsultationResponse = ConsultationBase
+ServiceRequestResponse = ServiceRequestBase
+ConsultantProfileResponse = ConsultantProfileBase
+ClientResponse = ClientBase
+LeadResponse = LeadBase
+ServiceResponse = ServiceBase
+ConsultationRequestResponse = ConsultationRequestBase
+VisitorInfoResponse = VisitorInfoCreate
+Token = BaseModel
+LoginRequest = BaseModel
+MessageResponse = BaseModel
+SessionUser = BaseModel
+SessionInfoResponse = BaseModel

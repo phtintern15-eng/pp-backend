@@ -497,4 +497,4 @@ def ai_concierge_chat():
 if __name__ == "__main__":
     from werkzeug.serving import run_simple
     print("\n" + "=" * 60 + "\n  [+] Pure Flask Platform Running at: http://127.0.0.1:8000\n" + "=" * 60 + "\n")
-    run_simple("127.0.0.1", 8000, app, use_reloader=True, use_debugger=True)
+    run_simple("127.0.0.1", 8000, app, use_reloader=True, use_debugger=false)
